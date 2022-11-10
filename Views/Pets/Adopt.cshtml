@@ -1,0 +1,54 @@
+﻿@model PetShop.Models.Pet
+
+@{
+    ViewBag.Title = "Adopt";
+}
+
+<h2>Adopt</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <h4>Pet</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.petName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.petName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.isMale)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.isMale)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Breed)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Breed)
+            </dd>
+
+        </dl>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Confirm" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.petID }) |
+    @Html.ActionLink("Confirm Adoption", "Adopt", new { id = Model.petID })
+</p>
+
+
+

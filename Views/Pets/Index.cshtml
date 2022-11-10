@@ -1,0 +1,80 @@
+﻿@model IEnumerable<PetShop.Models.Pet>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")|
+    @Html.ActionLink("My Pets", "Mypets")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.petID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.petName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isMale)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Breed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Owner)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.petAge)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.petID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.petName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isMale)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Breed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.petAge)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Owner.UserName)
+        </td>
+        <td>
+            <!--Only Admin is able to edit the pets info-->
+            @if (User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Edit", "Edit", new { id = item.petID })
+            }|
+            <!--Everyone is able to see the details of the pets-->
+            @Html.ActionLink("Details", "Details", new { id = item.petID }) |
+            <!--Only Admin is able to delete the pets info-->
+            @if (User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Delete", "Delete", new { id = item.petID })
+            }|
+
+            <!--Only able to see the adoption page after the user is logged in -->
+            @if (User.Identity.IsAuthenticated)
+            {
+                @Html.ActionLink("Adopt", "Adopt", new { id = item.petID })
+            }
+
+        </td>
+    </tr>
+}
+
+</table>
