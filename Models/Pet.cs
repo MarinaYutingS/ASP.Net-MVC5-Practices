@@ -5,8 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-//A02
-//Yuting Sha, c0842810
+
 
 
 namespace PetShop.Models
